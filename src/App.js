@@ -45,7 +45,7 @@ class App extends Component {
       persons:[
         {name:event.target.value,age:23},
         {name:'Saraogi',age:21},
-        {name:'Manu',age:25}
+        {name:'Manusasd',age:25}
       ] 
     }) ;
   }
