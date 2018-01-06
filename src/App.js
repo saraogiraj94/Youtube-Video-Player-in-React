@@ -12,9 +12,10 @@ class App extends Component {
 
   state = {
     persons: [
-      { name: 'Raj', age: 23 },
-      { name: 'Sharma', age: 21 },
-      { name: 'Manu', age: 25 }
+      { id:'1231',name: 'RajKumar', age: 23 },
+      { id:'12',name: 'Saraogi', age: 21 },
+       { id:'13',name: 'Manu', age: 25 }
+    
     ],
     showPersons: false,
     other: "Other details"
@@ -33,9 +34,9 @@ class App extends Component {
 
     this.setState({
       persons: [
-        { name: 'RajKumar', age: 23 },
-        { name: 'Saraogi', age: 21 },
-        { name: 'Manu', age: 25 }
+        { id:'1231',name: 'RajKumar', age: 23 },
+       { id:'12',name: 'Saraogi', age: 21 },
+        { id:'13',name: 'Manu', age: 25 }
       ]
     });
   }
@@ -52,20 +53,50 @@ class App extends Component {
   }
 
   togglePersonHandler = () => {
-    const doesShow=this.state.showPersons;
-    this.setState({showPersons:!doesShow});
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  }
+
+  //Delete the item in the list
+  //It is always better to render state wthout mutatating the orignal one
+  //Hence to do so we use spread operator to make a copy of the given json array or json object
+  deletePersonHandler=(index)=>{
+    const personIndex=this.state.persons.findIndex(p=>{
+      return p.id === index;
+    })
+
+    const Persons = [...this.state.persons];
+    Persons.splice(personIndex,1);
+    this.setState({
+      persons:Persons
+    })
   }
 
   render() {
 
     let persons = null;
     if (this.state.showPersons) {
+
+
       persons = (
         <div>
-        <Person name={this.state.persons[0].name} age="23" changed={this.changeNameHandler} />
-        <Person name={this.state.persons[1].name} age="21" />
-        <Person name={this.state.persons[2].name} age="24">Playing Football</Person>
-      </div>);
+          {
+            this.state.persons.map((person,index) => {
+              return <Person 
+              click={()=>this.deletePersonHandler(index)}
+              name={person.name} 
+              key={person.id}/>
+            })
+          }
+        </div>
+      )
+
+
+      //   <div>
+      //   <Person name={this.state.persons[0].name} age="23" changed={this.changeNameHandler} />
+      //   <Person name={this.state.persons[1].name} age="21" />
+      //   <Person name={this.state.persons[2].name} age="24">Playing Football</Person>
+      // </div>);
     }
 
 
