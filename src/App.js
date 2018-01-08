@@ -74,10 +74,21 @@ class App extends Component {
 
   render() {
 
+    //Adding styles to button
+    const style={
+      backgroundColor:'green',
+      font:'inherit',
+      color:'white',
+      border:'1px solid blue',
+      padding:'8px',
+      cursor:'pointer'
+    }
+
     let persons = null;
     if (this.state.showPersons) {
 
-
+      //Setting of the background color proporty
+      style.backgroundColor='red';  
       persons = (
         <div>
           {
@@ -105,7 +116,9 @@ class App extends Component {
         <h1> Hi I am React </h1>
 
         <button onClick={this.switchNameHandler}>Switch Name</button>
-        <button onClick={this.togglePersonHandler}>Toggle Person</button>
+        <button 
+        style={style}
+        onClick={this.togglePersonHandler}>Toggle Person</button>
         {persons}
 
       </div>
